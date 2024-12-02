@@ -9,7 +9,7 @@ body {
 }
 
 h1 {
-    margin: 2% 0;
+    margin: 20 0;
 }
 
 #controls {
@@ -55,6 +55,6 @@ footer {
     margin: auto; /* Center it horizontally if needed */
     border: 1px solid #ddd; /* Optional border */
     box-sizing: border-box; /* Ensures padding/border are included in the dimensions */
-    margin-bottom: 2%; /* Add some space at the bottom */
+    margin-bottom: 20; /* Add some space at the bottom */
 }
 
