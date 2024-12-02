@@ -3,7 +3,7 @@ const elt = document.getElementById('calculator');
 
 // Create a Desmos graphing calculator instance
 const calculator = Desmos.GraphingCalculator(elt, {
-    expressions: false,  // Hide expressions list
+    expressions: true,  
     settingsMenu: false, // Hide settings menu
 });
 
@@ -13,17 +13,40 @@ calculator.setExpression({
     id: 'hidden',
     latex: hiddenFunction,
     color: Desmos.Colors.BLUE,
-    hidden: true, // Keep the actual function hidden
+    secret: true
 });
+
+// Save the calculator state when the button is clicked
+document.getElementById('submit').addEventListener('click', () => {
+    const state = calculator.getState();
+    localStorage.setItem('calculatorState', JSON.stringify(state));
+    // alert('Calculator state saved!');
+});
+
+document.getElementById('submit').addEventListener('click', () => {
+    const state = calculator.getState();
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    // Create a temporary download link
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'calculator_state.json';
+    a.click();
+
+    // Clean up the URL object
+    URL.revokeObjectURL(url);
+});
+
 
 // Handle user guesses
 document.getElementById('submit').addEventListener('click', () => {
-    const userGuess = document.getElementById('guess').value;
+    const userGuess = document.getElementById('submit').value;
     calculator.setExpression({ id: 'userGuess', latex: userGuess, color: Desmos.Colors.RED });
 
-    if (userGuess === hiddenFunction) {
-        alert('Correct! You guessed the function!');
-    } else {
-        alert('Try again!');
-    }
+    // if (userGuess === hiddenFunction) {
+    //     alert('Correct! You guessed the function!');
+    // } else {
+    //     alert('Try again!');
+    // }
 });
