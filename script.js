@@ -16,6 +16,24 @@ calculator.setExpression({
     secret: true
 });
 
+// Second Function with a variable
+
+const hiddenFunction2 = 'y=ax^2+(4/a)'; // This is the function users are trying to guess
+
+calculator.setExpression({
+    id: 'variable_a',
+    latex: 'a=1',
+    sliderBounds: { min: 0, max: 10, step: 0 }
+});
+
+calculator.setExpression({
+    id: 'hidden2',
+    latex: hiddenFunction2,
+    color: Desmos.Colors.GREEN,
+    secret: true
+});
+
+
 // Save the calculator state when the button is clicked
 document.getElementById('submit').addEventListener('click', () => {
     const state = calculator.getState();
