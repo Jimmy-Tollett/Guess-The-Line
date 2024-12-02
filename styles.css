@@ -4,7 +4,7 @@ body {
     background-color: #f9f9f9;
     color: #333;
     height: 100%;
-    margin: 0;
+    margin: 2%;
     padding: 0;
 }
 
@@ -32,6 +32,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 4%;
 }
 
 button:hover {
