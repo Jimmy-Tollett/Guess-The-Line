@@ -49,12 +49,5 @@ footer {
     font-size: 14px;    /* Adjust font size */
 }
 
-#calculator {
-    width: 80%; /* Full width of the container */
-    height: 66vh; /* 2/3 of the viewport height */
-    margin: auto; /* Center it horizontally if needed */
-    border: 1px solid #ddd; /* Optional border */
-    box-sizing: border-box; /* Ensures padding/border are included in the dimensions */
-    margin-bottom: 20; /* Add some space at the bottom */
-}
+
 
