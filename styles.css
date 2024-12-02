@@ -41,3 +41,14 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+footer {
+    text-align: center; /* Centers the content */
+    padding: 10px;      /* Adds space inside the footer */
+    color: #333;        /* Text color */
+    position: fixed;    /* Sticks the footer to the bottom of the page */
+    bottom: 0;          /* Position at the very bottom */
+    left: 0;            /* Align to the left */
+    width: 100%;        /* Make it span the entire width of the page */
+    font-size: 14px;    /* Adjust font size */
+}
