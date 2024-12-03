@@ -63,6 +63,9 @@ calculator.setExpression({
     secret: true
 });
 
+const defaultState = calculator.getState(); // Save the default graph state
+calculator.setDefaultState(defaultState); // Set the default state
+
 
 // Login Functionality
 document.getElementById('login').addEventListener('click', () => {
