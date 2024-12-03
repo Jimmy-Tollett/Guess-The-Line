@@ -132,7 +132,6 @@ submitButton.addEventListener('click', () => {
 
     db.collection('graphs').add({
         uid: user.uid, // Associate with the logged-in user
-        email: user.email,
         state,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
