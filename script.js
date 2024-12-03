@@ -53,6 +53,8 @@ calculator.setExpression({
     secret: true
 });
 
+const defaultState = calculator.getState(); // Save the default graph state
+calculator.setDefaultState(defaultState);
 // Add event listener for graph interactions
 elt.addEventListener('click', () => {
     const user = auth.currentUser;
