@@ -7,7 +7,7 @@ const firebaseConfig = {
     messagingSenderId: "132299052897",
     appId: "1:132299052897:web:9fb18348c8a41d4439d720",
     measurementId: "G-5W36FLZFBT"
-  };
+};
 firebase.initializeApp(firebaseConfig);
 
 // Initialize Firebase services
@@ -29,18 +29,16 @@ const userEmailDisplay = document.getElementById('user-email');
 const submitButton = document.getElementById('submit');
 
 // Initialize Desmos
-// Get the calculator container
 const elt = document.getElementById('calculator');
 
 // Create a Desmos graphing calculator instance
 const calculator = Desmos.GraphingCalculator(elt, {
-    expressions: true,  
-    settingsMenu: false, // Hide settings menu
+    expressions: false, // Initially hide the expression panel
+    settingsMenu: false
 });
 
 // Set a hidden function that the user must guess
-
-const hiddenFunction = 'y=ax^2+(4/a)'; // This is the function users are trying to guess
+const hiddenFunction = 'y=ax^2+(4/a)';
 
 calculator.setExpression({
     id: 'variable_a',
@@ -55,37 +53,41 @@ calculator.setExpression({
     secret: true
 });
 
-const defaultState = calculator.getState(); // Save the default graph state
-calculator.setDefaultState(defaultState); // Set the default state
-
+// Add event listener for graph interactions
+elt.addEventListener('click', () => {
+    const user = auth.currentUser;
+    if (!user) {
+        alert('You must be logged in to interact with the graph.');
+    }
+});
 
 // Login Functionality
-document.getElementById('login').addEventListener('click', () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+loginButton.addEventListener('click', () => {
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
     auth.signInWithEmailAndPassword(email, password)
-        .then(userCredential => {
+        .then((userCredential) => {
             console.log('User logged in:', userCredential.user);
             alert(`Welcome back, ${userCredential.user.email}!`);
         })
-        .catch(error => {
+        .catch((error) => {
             console.error('Login error:', error);
             alert(error.message);
         });
 });
 
 // Sign-Up Functionality
-document.getElementById('signup').addEventListener('click', () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+signupButton.addEventListener('click', () => {
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
     auth.createUserWithEmailAndPassword(email, password)
-        .then(userCredential => {
+        .then((userCredential) => {
             console.log('User signed up:', userCredential.user);
             alert(`Account created for ${userCredential.user.email}`);
         })
-        .catch(error => {
+        .catch((error) => {
             console.error('Sign-up error:', error);
             alert(error.message);
         });
@@ -98,25 +100,30 @@ logoutButton.addEventListener('click', () => {
             console.log('User logged out');
             alert('You have been logged out.');
         })
-        .catch(error => {
+        .catch((error) => {
             console.error('Logout error:', error);
         });
 });
 
 // Handle Auth State Changes
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged((user) => {
     if (user) {
-        // User is logged in
         console.log('User is logged in:', user);
         authForm.style.display = 'none'; // Hide the login/signup form
         userInfo.style.display = 'block'; // Show the user info section
         userEmailDisplay.textContent = `Logged in as: ${user.email}`; // Display user email
+
+        // Enable the expression panel
+        calculator.updateSettings({ expressions: true });
+        calculator.updateSettings({ expressionsCollapsed: false });
     } else {
-        // User is logged out
         console.log('No user is logged in');
         authForm.style.display = 'flex'; // Show the login/signup form
         userInfo.style.display = 'none'; // Hide the user info section
         userEmailDisplay.textContent = ''; // Clear any previous user email
+
+        // Disable the expression panel
+        calculator.updateSettings({ expressions: false });
     }
 });
 
@@ -170,26 +177,4 @@ loadGraphButton.addEventListener('click', () => {
             console.error('Error loading graph:', error);
             alert('Failed to load graphs.');
         });
-});
-
-// Toggle UI Based on Auth State
-function toggleAuthUI(isLoggedIn) {
-    if (isLoggedIn) {
-        document.getElementById('auth').style.display = 'none';
-        document.getElementById('graphControls').style.display = 'block';
-    } else {
-        document.getElementById('auth').style.display = 'block';
-        document.getElementById('graphControls').style.display = 'none';
-    }
-}
-
-// Monitor Auth State
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        statusMessage.textContent = `Welcome, ${user.email}`;
-        toggleAuthUI(true);
-    } else {
-        statusMessage.textContent = 'Please log in.';
-        toggleAuthUI(false);
-    }
 });
