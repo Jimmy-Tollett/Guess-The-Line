@@ -26,6 +26,7 @@ const statusMessage = document.getElementById('status');
 const authForm = document.getElementById('auth');
 const userInfo = document.getElementById('user-info');
 const userEmailDisplay = document.getElementById('user-email');
+const submitButton = document.getElementById('submit');
 
 // Initialize Desmos
 // Get the calculator container
@@ -120,7 +121,7 @@ auth.onAuthStateChanged(user => {
 });
 
 // Save Graph
-saveGraphButton.addEventListener('click', () => {
+submitButton.addEventListener('click', () => {
     const state = calculator.getState(); // Get the current graph state
     const user = auth.currentUser;
 
