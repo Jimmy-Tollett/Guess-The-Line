@@ -1,54 +1,134 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f9f9f9;
     color: #333;
-    height: 100%;
-    margin: 2%;
+    margin: 0;
     padding: 0;
 }
 
 h1 {
-    margin: 20 0;
+    margin: 20px 0;
+    font-size: 2.5rem;
+    color: #444;
 }
 
-#controls {
-    margin-top: 20px;
-}
-
-input[type="text"] {
+/* Footer */
+footer {
+    text-align: center;
     padding: 10px;
-    font-size: 16px;
-    width: 300px;
+    background-color: #f1f1f1;
+    color: #333;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+}
+
+/* Authentication Section */
+#auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between inputs and buttons */
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 800px; /* Keep the bar centered and proportional */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#auth input[type="email"],
+#auth input[type="password"] {
+    padding: 10px;
+    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 250px; /* Ensure consistent input width */
+    box-sizing: border-box;
 }
 
-button {
-    padding: 10px 20px;
+#auth input[type="email"]:focus,
+#auth input[type="password"]:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#auth button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 42px; /* Align button height with input fields */
+}
+
+#user-info button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 42px; /* Align button height with input fields */
+}
+#auth button:hover {
+    background-color: #0056b3;
+}
+
+/* Desmos Calculator */
+#calculator {
+    width: 80%;
+    height: 60vh;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Submit Button */
+#submit {
+    padding: 12px 20px;
     font-size: 16px;
     color: #fff;
     background-color: #007BFF;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 4%;
+    margin: 20px auto;
+    display: block;
+    width: 150px;
 }
 
-button:hover {
+#submit:hover {
     background-color: #0056b3;
 }
 
-footer {
-    text-align: center; /* Centers the content */
-    padding: 10px;      /* Adds space inside the footer */
-    color: #333;        /* Text color */
-    position: fixed;    /* Sticks the footer to the bottom of the page */
-    bottom: 0;          /* Position at the very bottom */
-    left: 0;            /* Align to the left */
-    width: 100%;        /* Make it span the entire width of the page */
-    font-size: 14px;    /* Adjust font size */
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #auth {
+        flex-direction: column; /* Stack inputs and buttons on small screens */
+        align-items: stretch;
+        padding: 20px;
+    }
+
+    #auth input[type="email"],
+    #auth input[type="password"] {
+        width: 100%; /* Full width on small screens */
+    }
+
+    #auth button {
+        width: 100%; /* Full width for buttons */
+    }
 }
-
-
-

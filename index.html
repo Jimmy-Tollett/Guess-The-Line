@@ -5,15 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desmos Graph</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
     <script src="https://www.desmos.com/api/v1.10/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
 </head>
 <body>
-    <h1>Guess the Line!</h1>
-    <div id="calculator" style="width: 100%; height: 66vh; margin-bottom: 20; border: 1px solid #ddd"></div>
-    <button id="submit" style="margin: 10">Submit Guess</button>
+
+    <header>
+        <h1>Guess the Line!</h1>
+
+        <!-- Authentication Section -->
+        <div id="auth" class="form-container">
+            <input type="email" id="email" placeholder="Enter your email">
+            <input type="password" id="password" placeholder="Enter your password">
+            <div class="button-group">
+                <button id="login">Login</button>
+                <button id="signup">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- User Info Section -->
+        <div id="user-info" style="display: none;">
+            <p id="user-email"></p>
+            <button id="logout">Log Out</button>
+        </div>
+    
+    </header>
+
+    <!-- Desmos Calculator -->
+    <div id="calculator"></div>
+     <!-- Graph Controls -->
+     <div id="graphControls" class="form-container">
+        <button id="submit">Submit</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made By Jimmy Tollett, inspired by Ben Wilcox</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
-<footer>
-    <p>Made By Jimmy Tollett, inspired by Ben Wilcox</p>
-</footer>
 </html>
