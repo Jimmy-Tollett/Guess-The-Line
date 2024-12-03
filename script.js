@@ -38,17 +38,8 @@ const calculator = Desmos.GraphingCalculator(elt, {
 });
 
 // Set a hidden function that the user must guess
-const hiddenFunction = 'y=2x+3'; // This is the function users are trying to guess
-calculator.setExpression({
-    id: 'hidden',
-    latex: hiddenFunction,
-    color: Desmos.Colors.BLUE,
-    secret: true
-});
 
-// Second Function with a variable
-
-const hiddenFunction2 = 'y=ax^2+(4/a)'; // This is the function users are trying to guess
+const hiddenFunction = 'y=ax^2+(4/a)'; // This is the function users are trying to guess
 
 calculator.setExpression({
     id: 'variable_a',
@@ -57,8 +48,8 @@ calculator.setExpression({
 });
 
 calculator.setExpression({
-    id: 'hidden2',
-    latex: hiddenFunction2,
+    id: 'hidden',
+    latex: hiddenFunction,
     color: Desmos.Colors.GREEN,
     secret: true
 });
