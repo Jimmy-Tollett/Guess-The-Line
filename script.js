@@ -112,6 +112,7 @@ auth.onAuthStateChanged((user) => {
         authForm.style.display = 'none'; // Hide the login/signup form
         userInfo.style.display = 'block'; // Show the user info section
         userEmailDisplay.textContent = `Logged in as: ${user.email}`; // Display user email
+        submit.style.display = 'block'; // Show the submit button
 
         // Enable the expression panel
         calculator.updateSettings({ expressions: true });
@@ -121,6 +122,7 @@ auth.onAuthStateChanged((user) => {
         authForm.style.display = 'flex'; // Show the login/signup form
         userInfo.style.display = 'none'; // Hide the user info section
         userEmailDisplay.textContent = ''; // Clear any previous user email
+        submit.style.display = 'none'; // Hide the submit button
 
         // Disable the expression panel
         calculator.updateSettings({ expressions: false });
