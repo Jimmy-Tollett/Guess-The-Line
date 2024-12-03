@@ -27,6 +27,10 @@ const authForm = document.getElementById('auth');
 const userInfo = document.getElementById('user-info');
 const userEmailDisplay = document.getElementById('user-email');
 const submitButton = document.getElementById('submit');
+const newUserButton = document.getElementById('newUser');
+const existingUserButton = document.getElementById('existingUser');
+const newUser = false;
+const usernameInput = document.getElementById('username');
 
 // Initialize Desmos
 const elt = document.getElementById('calculator');
@@ -63,6 +67,24 @@ elt.addEventListener('click', () => {
     }
 });
 
+// Toggle to "New User" Mode
+newUserButton.addEventListener('click', () => {
+    usernameInput.style.display = 'block'; // Show username field
+    signupButton.style.display = 'inline-block'; // Show Sign Up button
+    loginButton.style.display = 'none'; // Hide Login button
+    newUserButton.style.display = 'none'; // Hide "New User?" button
+    existingUserButton.style.display = 'inline-block'; // Show "Existing User" button
+});
+
+// Toggle to "Existing User" Mode
+existingUserButton.addEventListener('click', () => {
+    usernameInput.style.display = 'none'; // Hide username field
+    signupButton.style.display = 'none'; // Hide Sign Up button
+    loginButton.style.display = 'inline-block'; // Show Login button
+    newUserButton.style.display = 'inline-block'; // Show "New User?" button
+    existingUserButton.style.display = 'none'; // Hide "Existing User" button
+});
+
 // Login Functionality
 loginButton.addEventListener('click', () => {
     const email = emailInput.value;
@@ -70,8 +92,9 @@ loginButton.addEventListener('click', () => {
 
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            console.log('User logged in:', userCredential.user);
-            alert(`Welcome back, ${userCredential.user.email}!`);
+            const user = userCredential.user;
+            console.log('User logged in:', user);
+            alert(`Welcome back, ${user.email}!`);
         })
         .catch((error) => {
             console.error('Login error:', error);
@@ -83,17 +106,35 @@ loginButton.addEventListener('click', () => {
 signupButton.addEventListener('click', () => {
     const email = emailInput.value;
     const password = passwordInput.value;
+    const username = usernameInput.value;
+
+    if (!username) {
+        alert('Please enter a username.');
+        return;
+    }
 
     auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            console.log('User signed up:', userCredential.user);
-            alert(`Account created for ${userCredential.user.email}`);
+            const user = userCredential.user;
+            console.log('User signed up:', user);
+
+            // Save user details in Firestore
+            db.collection('users').doc(user.uid).set({
+                username: username,
+                email: email,
+            }).then(() => {
+                console.log('User details saved in Firestore.');
+                alert(`Account created for ${username}`);
+            }).catch((error) => {
+                console.error('Error saving user details:', error);
+            });
         })
         .catch((error) => {
             console.error('Sign-up error:', error);
             alert(error.message);
         });
 });
+
 
 // Log Out Functionality
 logoutButton.addEventListener('click', () => {
@@ -143,7 +184,7 @@ submitButton.addEventListener('click', () => {
 
     db.collection('graphs').add({
         uid: user.uid, // Associate with the logged-in user
-        state,
+        state,        // Save the graph state
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
         alert('Graph saved successfully!');
@@ -151,34 +192,4 @@ submitButton.addEventListener('click', () => {
         console.error('Error saving graph:', error);
         alert('Failed to save graph.');
     });
-});
-
-// Load Graph
-loadGraphButton.addEventListener('click', () => {
-    const user = auth.currentUser;
-
-    if (!user) {
-        alert('You must be logged in to load your graphs!');
-        return;
-    }
-
-    db.collection('graphs')
-        .where('uid', '==', user.uid) // Filter by the current user's graphs
-        .orderBy('createdAt', 'desc')
-        .get()
-        .then((querySnapshot) => {
-            if (querySnapshot.empty) {
-                alert('No graphs found!');
-                return;
-            }
-
-            // Load the first graph in the list
-            const graph = querySnapshot.docs[0].data();
-            calculator.setState(graph.state); // Restore the graph state
-            alert('Graph loaded successfully!');
-        })
-        .catch((error) => {
-            console.error('Error loading graph:', error);
-            alert('Failed to load graphs.');
-        });
 });

@@ -20,14 +20,19 @@
         <h1>Guess the Line!</h1>
 
         <!-- Authentication Section -->
-        <div id="auth" class="form-container">
+        <div id="auth">
+            <!-- Input Fields -->
             <input type="email" id="email" placeholder="Enter your email">
             <input type="password" id="password" placeholder="Enter your password">
-            <div class="button-group">
-                <button id="login">Login</button>
-                <button id="signup">Sign Up</button>
-            </div>
+            <input type="text" id="username" placeholder="Enter your username" style="display: none;"> <!-- Hidden by default -->
+        
+            <!-- Buttons -->
+            <button id="login">Login</button>
+            <button id="signup" style="display: none;">Sign Up</button> <!-- Hidden by default -->
+            <button id="newUser">New User?</button>
+            <button id="existingUser" style="display: none;">Existing User?</button> <!-- Hidden by default -->
         </div>
+        
 
         <!-- User Info Section -->
         <div id="user-info" style="display: none;">

@@ -43,34 +43,32 @@ footer {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#auth input[type="email"],
-#auth input[type="password"] {
+#auth input {
+    margin: 10px 0;
     padding: 10px;
-    font-size: 14px;
+    font-size: 16px;
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 250px; /* Ensure consistent input width */
     box-sizing: border-box;
 }
 
-#auth input[type="email"]:focus,
-#auth input[type="password"]:focus {
-    border-color: #007BFF;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
 #auth button {
-    padding: 10px 15px;
-    font-size: 14px;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    font-size: 16px;
     color: #fff;
     background-color: #007BFF;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    height: 42px; /* Align button height with input fields */
 }
+
+#auth button:hover {
+    background-color: #0056b3;
+}
+
 
 #user-info button {
     padding: 10px 15px;
@@ -83,9 +81,7 @@ footer {
     transition: background-color 0.3s ease;
     height: 42px; /* Align button height with input fields */
 }
-#auth button:hover {
-    background-color: #0056b3;
-}
+
 
 /* Desmos Calculator */
 #calculator {
