@@ -33,6 +33,7 @@ const newUser = false;
 const usernameInput = document.getElementById('username');
 const daySelect = document.getElementById("day-select");
 const calculatorContainer = document.getElementById("calculator");
+const loadLastGraphButton = document.getElementById('loadLastGraph');
 
 // Initialize Desmos
 const elt = document.getElementById('calculator');
@@ -92,6 +93,36 @@ function loadGraph(day) {
         console.error(`No graph found for ${day}`);
     }
 }
+
+
+// Fetch the last submitted graph for the current day
+function fetchLastSubmittedGraph() {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("You must be logged in to retrieve your last submitted graph!");
+        return;
+    }
+
+    const userGraphRef = db.collection("daySubmissions").doc(`${user.uid}_${currentDay}`);
+
+    userGraphRef
+        .get()
+        .then((doc) => {
+            if (doc.exists) {
+                const graphState = doc.data().state;
+                calculator.setState(graphState); // Load the graph state into Desmos
+                alert("Last submitted graph loaded successfully!");
+            } else {
+                alert("No graph found for the current day.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching last submitted graph:", error);
+            alert("Failed to retrieve the last submitted graph.");
+        });
+}
+loadLastGraphButton.addEventListener('click', fetchLastSubmittedGraph);
 
 // Handle dropdown change
 daySelect.addEventListener("change", (event) => {
@@ -199,6 +230,7 @@ auth.onAuthStateChanged((user) => {
         userInfo.style.display = 'block'; // Show the user info section
         userEmailDisplay.textContent = `Logged in as: ${user.email}`; // Display user email
         submitButton.style.display = 'block'; // Show the submit button
+        loadLastGraphButton.style.display = 'block'; // Show the load last graph button
 
         // Enable the expression panel
         calculator.updateSettings({ expressions: true });
@@ -209,6 +241,7 @@ auth.onAuthStateChanged((user) => {
         userInfo.style.display = 'none'; // Hide the user info section
         userEmailDisplay.textContent = ''; // Clear any previous user email
         submitButton.style.display = 'none'; // Hide the submit button
+        loadLastGraphButton.style.display = 'none'; // Hide the load last graph button
 
         // Disable the expression panel
         calculator.updateSettings({ expressions: false });
