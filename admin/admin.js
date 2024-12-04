@@ -35,16 +35,16 @@ auth.onAuthStateChanged((user) => {
     if (user) {
         console.log('User is logged in:', user);
         useremail.textContent = auth.currentUser.email;
-        if (auth.currentUser.email !== "jimmy.tollett@icloud.com") {
-            console.log('User is not an admin');
-            // Show error message
-            errorMessage.textContent = "You are not authorized to access this page.";
-        }
-        else {
+        if (auth.currentUser.email == "jimmy.tollett@icloud.com" || auth.currentUser.email == "jimmoltt@google.slides") {
             console.log('User is an admin');
             // Hide error message
             errorMessage.textContent = "";
             adminContainer.style.display = "block";
+        }
+        else {
+            console.log('User is not an admin');
+            // Show error message
+            errorMessage.textContent = "You are not authorized to access this page.";
         }
         // Perform actions for logged-in user
     } else {
