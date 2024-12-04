@@ -1,18 +1,3 @@
-// Firebase Configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDYS8Fg3OanCFCAnDbZoVy8IWPaXN3VrQY",
-    authDomain: "guess-the-line-authentication.firebaseapp.com",
-    projectId: "guess-the-line-authentication",
-    storageBucket: "guess-the-line-authentication.firebasestorage.app",
-    messagingSenderId: "132299052897",
-    appId: "1:132299052897:web:9fb18348c8a41d4439d720",
-    measurementId: "G-5W36FLZFBT",
-};
-firebase.initializeApp(firebaseConfig);
-
-// Initialize Firebase services
-const db = firebase.firestore();
-
 // DOM Elements
 const graphContainer = document.getElementById('graph-container');
 const submissionUsername = document.getElementById('submission-username');
