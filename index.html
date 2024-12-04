@@ -42,18 +42,22 @@
     
     </header>
 
-    <!-- Desmos Calculator -->
-    <div id="calculator"></div>
-     <!-- Graph Controls -->
-     <div id="graphControls" class="form-container">
-        <button id="submit">Submit</button>
+    <div id="controls" style="text-align: center; margin: 20px;">
+        <label for="day-select">Select Day:</label>
+        <select id="day-select">
+            <!-- Options will be dynamically populated -->
+        </select>
+    </div>
+    <div id="calculator" style="width: 80%; height: 66vh; border: 1px solid #ddd; margin-top: 20px;"></div>
+    <div style="display: flex; justify-content: center; gap: 5px; margin-top: 20px;"></div>
+        <button id="submit">Submit Guess</button>
+        <button id="loadLastGraph">Load Last Submitted Graph</button>
     </div>
 
     <!-- Footer -->
     <footer>
         <p>Made By <a href="http://jtollett.me">Jimmy Tollett</a>, inspired by <a href="https://benwilcox.dev/home/">Ben Wilcox</a></p>
     </footer>
-    
 
     <script src="script.js"></script>
 </body>

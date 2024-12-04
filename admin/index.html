@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Add Secret Graph</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="https://www.desmos.com/api/v1.10/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <h1>Admin - Add Secret Graph</h1>
+    <div id="admin-container" style="text-align: center; margin: 20px;">
+        <label for="day-input">Day:</label>
+        <input type="number" id="day-input" placeholder="Enter Day Number" style="margin: 10px;">
+        <div id="calculator" style="width: 80%; height: 60vh; margin: 20px auto; border: 1px solid #ddd;"></div>
+        <button id="submit-graph" style="margin: 10px; padding: 10px 20px;">Submit Graph</button>
+        <p id="status-message" style="margin: 20px; color: green;"></p>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
