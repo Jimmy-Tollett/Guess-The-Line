@@ -12,18 +12,49 @@ firebase.initializeApp(firebaseConfig);
 
 // Initialize Firestore
 const db = firebase.firestore();
+const auth = firebase.auth();
 
 // DOM Elements
 const dayInput = document.getElementById("day-input");
 const submitButton = document.getElementById("submit-graph");
 const statusMessage = document.getElementById("status-message");
 const calculatorContainer = document.getElementById("calculator");
+const useremail = document.getElementById("user-email");
+const adminContainer = document.getElementById("admin-container");
+const errorMessage = document.getElementById("error-message");
 
 // Initialize Desmos Calculator
 const calculator = Desmos.GraphingCalculator(calculatorContainer, {
     expressions: true,
     settingsMenu: true,
 });
+
+// Handle Auth State Changes
+auth.onAuthStateChanged((user) => {
+    adminContainer.style.display = "none";
+    if (user) {
+        console.log('User is logged in:', user);
+        useremail.textContent = auth.currentUser.email;
+        if (auth.currentUser.email !== "jimmy.tollett@icloud.com") {
+            console.log('User is not an admin');
+            // Show error message
+            errorMessage.textContent = "You are not authorized to access this page.";
+        }
+        else {
+            console.log('User is an admin');
+            // Hide error message
+            errorMessage.textContent = "";
+            adminContainer.style.display = "block";
+        }
+        // Perform actions for logged-in user
+    } else {
+        console.log('No user is logged in');
+        // Redirect to login page
+        window.location.href = '/login/';
+    }
+});
+
+
 
 // Submit Graph to Firestore
 submitButton.addEventListener("click", () => {

@@ -1,0 +1,146 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 20px 0;
+    font-size: 2.5rem;
+    color: #444;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: #333;
+    border-top: 1px solid #ddd;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+/* Authentication Section */
+#auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between inputs and buttons */
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 800px; /* Keep the bar centered and proportional */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#auth input {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#auth button {
+    margin: 10px 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#auth button:hover {
+    background-color: #0056b3;
+}
+
+
+#user-info button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 42px; /* Align button height with input fields */
+}
+
+
+/* Desmos Calculator */
+#calculator {
+    width: 80%;
+    height: 60vh;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Submit Button */
+#submit {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    width: 150px;
+}
+
+#submit:hover {
+    background-color: #0056b3;
+}
+
+/* Submit Button */
+#loadLastGraph {
+    padding: 12px 20px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    width: 150px;
+}
+
+#loadLastGraph:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #auth {
+        flex-direction: column; /* Stack inputs and buttons on small screens */
+        align-items: stretch;
+        padding: 20px;
+    }
+
+    #auth input[type="email"],
+    #auth input[type="password"] {
+        width: 100%; /* Full width on small screens */
+    }
+
+    #auth button {
+        width: 100%; /* Full width for buttons */
+    }
+}
