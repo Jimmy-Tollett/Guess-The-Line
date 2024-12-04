@@ -42,8 +42,15 @@
     
     </header>
 
-    <!-- Desmos Calculator -->
-    <div id="calculator"></div>
+    <div id="controls" style="text-align: center; margin: 20px;">
+        <label for="day-select">Select Day:</label>
+        <select id="day-select">
+            <!-- Options will be dynamically populated -->
+        </select>
+    </div>
+    <div id="calculator" style="width: 80%; height: 66vh; border: 1px solid #ddd; margin-top: 20px;"></div>
+    <button id="submit" style="margin-top: 20px;">Submit Guess</button>
+    
      <!-- Graph Controls -->
      <div id="graphControls" class="form-container">
         <button id="submit">Submit</button>

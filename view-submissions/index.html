@@ -51,19 +51,21 @@
 </head>
 <body>
     <a href="http://jtollett.me/Guess-The-Line/" style="text-decoration: none;"><h1>Submitted Graphs</h1></a>
-    <h2>Graph Preview</h2>
-    <div id="graph-container"></div>
-
-    <div id="submission-info">
-        <p>Username: <span id="submission-username"></span></p>
-        <p>Time Submitted: <span id="submission-time"></span></p>
+    <div id="controls" style="text-align: center; margin: 20px;">
+        <label for="day-select">Select Day:</label>
+        <select id="day-select">
+            <option value="">Select a Day</option>
+        </select>
     </div>
-
-    <div class="navigation-buttons">
-        <button id="prev-submission">Prev. Submission</button>
+    <div id="graph-container" style="width: 80%; height: 60vh; margin: 20px auto; border: 1px solid #ddd;"></div>
+    <div id="submission-info" style="text-align: center; margin-top: 20px;">
+        <p>Username: <span id="submission-username">Loading...</span></p>
+        <p>Time Submitted: <span id="submission-time">Loading...</span></p>
+    </div>
+    <div id="navigation-buttons" style="text-align: center; margin-top: 20px;">
+        <button id="prev-submission">Previous Submission</button>
         <button id="next-submission">Next Submission</button>
     </div>
-
     <footer>
         <p>Made By <a href="https://yourwebsite.com" target="_blank" rel="noopener noreferrer">Jimmy Tollett</a>, inspired by Ben Wilcox</p>
     </footer>
