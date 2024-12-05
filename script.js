@@ -46,8 +46,18 @@ const calculator = Desmos.GraphingCalculator(elt, {
 
 
 // Global Variables
+// Global Variables
 let secretGraphs = {}; // Store graphs by day
-let currentDay = "Day 1"; // Default to "Day 1"
+let currentDay = calculateCurrentDay(); // Calculate the current day
+
+// Calculate the current day based on the date
+function calculateCurrentDay() {
+    const startDate = new Date('2024-12-01');
+    const today = new Date();
+    const diffTime = Math.abs(today - startDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24) - 1); // subtract 1 to start from Day 1
+    return `Day ${diffDays}`;
+}
 
 // Fetch secret graphs from Firestore
 function fetchSecretGraphs() {
@@ -69,13 +79,16 @@ function fetchSecretGraphs() {
         });
 }
 
-// Populate the dropdown with days
+// Populate the dropdown with days and set the selected option to the current day
 function populateDayDropdown() {
     daySelect.innerHTML = ""; // Clear existing options
     Object.keys(secretGraphs).forEach((day) => {
         const option = document.createElement("option");
         option.value = day;
         option.textContent = day;
+        if (day === currentDay) {
+            option.selected = true; // Set the current day as selected
+        }
         daySelect.appendChild(option);
     });
 }
@@ -91,6 +104,29 @@ function loadGraph(day) {
         currentDay = day; // Update the current day
     } else {
         console.error(`No graph found for ${day}`);
+        loadLastAvailableGraph();
+    }
+}
+
+// Load the last available graph if the current day's graph is not available
+function loadLastAvailableGraph() {
+    const days = Object.keys(secretGraphs).sort((a, b) => {
+        const dayA = parseInt(a.split(' ')[1]);
+        const dayB = parseInt(b.split(' ')[1]);
+        return dayB - dayA;
+    });
+
+    if (days.length > 0) {
+        const lastAvailableDay = days[0];
+        const graphState = secretGraphs[lastAvailableDay];
+        calculator.setState(graphState); // Load the graph state into Desmos
+        calculator.setExpression({id: '1', secret: true});
+        const defaultState = calculator.getState(); // Save the default graph state
+        calculator.setDefaultState(defaultState);
+        currentDay = lastAvailableDay; // Update the current day
+        console.log(`Loaded last available graph for ${lastAvailableDay}`);
+    } else {
+        console.error("No graphs available.");
     }
 }
 
